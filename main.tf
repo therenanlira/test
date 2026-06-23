@@ -14,7 +14,7 @@ provider "aws" {
 
 # Um recurso de rede simples apenas para teste
 resource "aws_vpc" "rede_principal" {
-  cidr_block = "10.0.0.0/16"
+  cidr_block           = "10.0.0.0/16"
   enable_dns_hostnames = true
 
   tags = {
