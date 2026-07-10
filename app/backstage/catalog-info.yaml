@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: meu-backstage
+  description: Minha primeira instância de Backstage, provisionada neste desafio.
+spec:
+  type: service
+  lifecycle: experimental
+  owner: guests
