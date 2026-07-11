@@ -5,7 +5,7 @@ metadata:
   description: An example of a Backstage application.
 spec:
   type: website
-  owner: guests
+  owner: group:time-plataforma
   lifecycle: experimental
   system: plataforma-devops
   dependsOn:
@@ -17,7 +17,8 @@ metadata:
   name: plataforma-devops
   description: Agrupa os componentes provisionados no desafio de Plataforma.
 spec:
-  owner: guests
+  owner: group:time-plataforma
+  domain: developer-experience
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
@@ -26,7 +27,7 @@ metadata:
   description: Banco de dados PostgreSQL que armazena os dados do catálogo do Backstage.
 spec:
   type: database
-  owner: guests
+  owner: group:time-plataforma
   system: plataforma-devops
 ---
 apiVersion: backstage.io/v1alpha1
@@ -36,6 +37,30 @@ metadata:
   description: Servidor Nginx provisionado no desafio de Orquestração.
 spec:
   type: service
-  owner: guests
+  owner: group:time-plataforma
   lifecycle: production
   system: plataforma-devops
+---
+apiVersion: backstage.io/v1alpha1
+kind: Domain
+metadata:
+  name: developer-experience
+  description: Domínio de plataformas internas e ferramentas para desenvolvedores.
+spec:
+  owner: group:time-plataforma
+---
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: time-plataforma
+  description: Time responsável por operar o IDP.
+spec:
+  type: team
+  children: []
+---
+apiVersion: backstage.io/v1alpha1
+kind: User
+metadata:
+  name: therenanlira
+spec:
+  memberOf: [time-plataforma]
