@@ -1,13 +1,41 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: backstage
+  name: meu-backstage
   description: An example of a Backstage application.
-  # Example for optional annotations
-  # annotations:
-  #   github.com/project-slug: backstage/backstage
-  #   backstage.io/techdocs-ref: dir:.
 spec:
   type: website
-  owner: john@example.com
+  owner: guests
   lifecycle: experimental
+  system: plataforma-devops
+  dependsOn:
+    - resource:postgres
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: plataforma-devops
+  description: Agrupa os componentes provisionados no desafio de Plataforma.
+spec:
+  owner: guests
+---
+apiVersion: backstage.io/v1alpha1
+kind: Resource
+metadata:
+  name: postgres
+  description: Banco de dados PostgreSQL que armazena os dados do catálogo do Backstage.
+spec:
+  type: database
+  owner: guests
+  system: plataforma-devops
+---
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: meu-site-nginx
+  description: Servidor Nginx provisionado no desafio de Orquestração.
+spec:
+  type: service
+  owner: guests
+  lifecycle: production
+  system: plataforma-devops
