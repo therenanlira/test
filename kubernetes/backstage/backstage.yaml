@@ -16,7 +16,6 @@ spec:
       containers:
         - name: backstage
           image: docker.io/therenanlira/meu-backstage:latest
-          imagePullPolicy: Always
           ports:
             - name: http
               containerPort: 7000
@@ -31,8 +30,6 @@ spec:
               value: ":7000"
             # O login "Guest" é bloqueado fora de ambiente de desenvolvimento por padrão;
             # essa flag libera para fins de estudo (NODE_ENV=production na imagem)
-            - name: APP_CONFIG_auth_providers_guest_dangerouslyAllowOutsideDevelopment
-              value: "true"
             - name: POSTGRES_HOST
               value: "postgres"
             - name: POSTGRES_PORT
@@ -52,6 +49,16 @@ spec:
                 secretKeyRef:
                   name: backstage-secrets
                   key: GITHUB_TOKEN
+            - name: AUTH_GITHUB_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: AUTH_GITHUB_CLIENT_ID
+            - name: AUTH_GITHUB_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: backstage-secrets
+                  key: AUTH_GITHUB_CLIENT_SECRET
           resources:
             requests:
               memory: "256Mi"
